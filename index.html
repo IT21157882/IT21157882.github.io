@@ -100,6 +100,567 @@ class Lottery
     }
 }
 ..............................................................................................................................................................
+      //Version B
+       //Alien
+
+public interface Alien 
+{
+	public int getScore();
+	
+}
+
+
+//AlienPack
+
+public class AlienPack 
+{
+	Alien arr[];
+	
+	public AlienPack(int noOfAliens)
+	{
+		arr = new Alien[noOfAliens];
+	}
+	
+	public void addAliens(Alien a, int index)
+	{
+		arr[index] = a;
+	}
+	public Alien[] getAliens()
+	{
+		return arr;
+	}
+}
+
+//Main
+
+public class Main {
+
+	public static void main(String[] args) 
+	{
+		AlienPack pack1 = new AlienPack(5);
+		pack1.addAliens(new MarshmalloAlien(), 0);
+		pack1.addAliens(new OrgeAlien(), 1);
+		pack1.addAliens(new OrgeAlien(), 2);
+		pack1.addAliens(new SnakeAlien(), 3);
+		pack1.addAliens(new MarshmalloAlien(), 4);
+		
+		MenInBlack AgentK = new MenInBlack(pack1);
+		AgentK.kill();
+		System.out.println( "Your score is " + AgentK.getScore());
+		MenInBlack2 AgentK2 = new MenInBlack2(pack1);
+		AgentK2.kill();
+		System.out.println( "Your score is " + AgentK2.getScore());
+
+	}
+
+}
+
+//MarshmalloAlien
+
+public class MarshmalloAlien implements Alien 
+{
+	int score =15;
+	public int getScore()
+	{
+		return score;
+		
+	}
+}
+
+//MenInBlack
+public class MenInBlack 
+{
+	int score;
+	AlienPack ap;
+	
+	public MenInBlack(AlienPack a)
+	{
+		ap = a;
+		score = 0;
+	}
+	
+	public int getScore()
+	{
+		return score;
+	}
+	
+	public void kill()
+	{
+		Alien arr[] = ap.getAliens();
+		
+		for(int i =0 ; i<arr.length ; i++)
+		{
+			this.score = this.score + arr[i].getScore();
+		}
+	}
+}
+
+//MenInBlack2
+
+public class MenInBlack2 extends MenInBlack 
+{
+	public MenInBlack2(AlienPack a) 
+	{
+		super(a);
+		score = 0;
+	}
+
+	public void kill()
+	{
+		Alien arr[] = ap.getAliens();
+		
+		for(int i =0 ; i<arr.length ; i++)
+		{
+			Random rand = new Random();
+			
+			this.score = this.score + arr[i].getScore();
+			
+			if(rand.nextInt()%2==1)
+			{
+				this.score = this.score - 2;
+			}
+		}
+	}
+}
+
+
+//OrgeAlien
+public class OrgeAlien implements Alien 
+{
+	int score = 10;
+	public int getScore()
+	{
+		return score;
+	}
+
+}
+
+//SnakeAlien
+
+public class SnakeAlien implements Alien 
+{
+	int score = 5;
+	public int getScore()
+	{
+		return score;
+	}
+}
+...........................................................................................................................................................................
+//Version C
+
+package com.mycompany.javaproject1;
+
+public class JavaProject1
+{
+        public static void main(String args[]) 
+        {
+                RandNum myRandumObject = new RandNum();
+                myRandumObject.display();
+        }
+
+}
+
+class RandNum
+{
+        int[][] array2D = new int[5][5];
+        
+        public RandNum()
+        {
+                int max = 100, min = 1, range = max - min + 1;
+                
+                for (int i = 0; i < this.array2D.length; i++)
+                {
+                        for (int j = 0; j < this.array2D[0].length; j++) 
+                        {
+                                this.array2D[i][j] = (int)(range * Math.random()) + min;
+                        }     
+                }
+        }
+        
+        public void display()
+        {
+                int minimum = this.array2D[0][0], maximum = this.array2D[0][0], total = 0;
+                double avg;
+                
+                
+                System.out.println("\nArray numbers : ");
+                
+                for (int i = 0; i < this.array2D.length; i++)
+                {
+                        for (int j = 0; j < this.array2D[0].length; j++) 
+                        {
+                                System.out.print( this.array2D[i][j] + "  ");
+
+                                //calculating the minimuum number among all
+                                if (minimum > this.array2D[i][j]) 
+                                {
+                                        minimum = this.array2D[i][j];
+                                }
+                                
+                                //calculating the maximum number among all
+                                if (maximum < this.array2D[i][j])
+                                {
+                                        maximum = this.array2D[i][j];
+                                }
+                                
+                                //calculating the total of all 25 values in the 2d array
+                                total += this.array2D[i][j];
+                        }
+                        
+                        System.out.println("");
+                }
+                
+                avg = (double)total / ( this.array2D.length * this.array2D[0].length );
+                
+                System.out.printf("\n\t Maximum : %d\n\t Minimum : %d\n\t Average : %.2f\n", maximum, minimum, avg);
+                
+        }
+}
+
+...........................................................................................................................................................................
+  //Version D
+  package VersionD;
+
+
+public class CharArray {
+	
+	char myCharArray[];
+
+	public CharArray(char[] myCharArray) {
+		super();
+		this.myCharArray = myCharArray;
+	}
+	
+	void swapFirstandLast() {
+		char x=myCharArray[0];
+		char y=myCharArray[myCharArray.length-1];
+		myCharArray[0]=y;
+		myCharArray[myCharArray.length-1]=x;
+	}
+	void displayatrry() {
+		for (int x=0;x<myCharArray.length;x++) {
+			System.out.println(myCharArray[x]);
+		}
+	}
+	void displayString() {
+		System.out.println(String.valueOf(myCharArray));
+	}
+public static void main(String[] args) {
+	char a[]= {'a','b','c','d'};
+	CharArray c =new CharArray(a);
+	c.swapFirstandLast();
+	c.displayatrry();
+	c.displayString();
+	
+}
+}
+  ....................................................................................................................................................................
+  //Version E
+  
+package com.mycompany.javaproject1;
+
+public class JavaProject1
+{
+        public static void main(String args[]) 
+        {
+                Student stu1 = new Student("IT21355058", "Sudantha");
+                stu1.display();
+        }
+
+}
+
+class InvalidITNumberException extends Exception
+{
+        public InvalidITNumberException(String errorMsg)
+        {
+                super(errorMsg);
+        }
+}
+
+class Student 
+{
+        private String StudentID, StudentName;
+
+        public Student(String StudentID, String StudentName)
+        {
+                this.StudentID = StudentID;
+                this.StudentName = StudentName;
+        }
+
+        public void  display() 
+        {
+                try 
+                {
+                        if(this.StudentID.startsWith("IT") && checkString.isNumeric(this.StudentID.substring(2)) && this.StudentID.substring(2).length() == 8)
+                                System.out.println("\nStudent{ StudentID=" + StudentID + ", StudentName=" + StudentName + "}");
+                        else
+                                throw new InvalidITNumberException("invalid IT Number !");
+                } 
+                catch (InvalidITNumberException e)
+                {
+                        System.out.println("\n Error occured : " + e.getMessage());
+                }
+                
+        }
+      
+}
+
+class checkString
+{
+        public static boolean isNumeric(String str)
+        {
+                if (str == null || str.length() == 0) 
+                {
+                        return false;
+                }
+                return str.chars().allMatch(Character::isDigit);
+        }
+}
+  ....................................................................................................................................................................
+  
+  //Version F
+  
+package com.mycompany.javaproject1;
+import java.util.Scanner;
+import java.util.ArrayList;
+
+
+public class JavaProject1
+{
+        public static void main(String args[]) 
+        {
+                AlarmClock alarm1 = new AlarmClock();
+                AlarmClock alarm2 = new AlarmClock();
+                
+                alarm1.InputAlarm();
+                alarm2.SetAlarm(6, 35, 10);
+                
+                ArrayList<AlarmClock> alarmsList = new ArrayList<>();
+                alarmsList.add(alarm1);
+                alarmsList.add(alarm2);
+
+                for (AlarmClock alarmClock : alarmsList)
+                {
+                        alarmClock.ShowAlarm();
+                }   
+        }
+}
+
+
+class HoursOutOfRange extends Exception
+{
+        public HoursOutOfRange(String msg)
+        {
+                super(msg);
+        }
+}
+
+
+class MinutesOutOfRange extends Exception
+{
+        public MinutesOutOfRange(String msg)
+        {
+                super(msg);
+        }
+}
+
+
+class SecondsOutOfRange extends Exception
+{
+        public SecondsOutOfRange(String msg)
+        {
+                super(msg);
+        }
+}
+
+class AlarmClock
+{
+        private int Hour;
+        private int Minute;
+        private int Second;
+
+        public AlarmClock()
+        {
+                this.Hour = 12;
+                this.Minute = 0;
+                this.Second = 0;
+        }
+        
+        public void InputAlarm()
+        {
+                Scanner reader = new Scanner(System.in);
+                
+                try 
+                {
+                        System.out.print("Hours  : ");
+                        this.Hour = reader.nextInt();
+                        
+                         if(!(this.Hour <= 12 && this.Hour >= 0))
+                                throw new HoursOutOfRange("\n\t * Hours should be in range to 0 to 12 *\n");
+                        
+                        System.out.print("Minute : ");
+                        this.Minute = reader.nextInt();
+                        
+                        if(!(this.Minute < 60 && this.Minute >= 0))
+                                throw new MinutesOutOfRange("\n\t * Minutes should be in range to 0 to 60 *\n");
+                        
+                        System.out.print("Second : ");
+                        this.Second = reader.nextInt();
+                                                
+                        if(!(this.Second < 60 && this.Second >= 0))
+                                throw new SecondsOutOfRange("\n\t * Seconds should be in range to 0 to 60 *\n");
+                }
+                catch (NumberFormatException e)
+                {
+                        System.out.println("\n\t ! You entered a non numeric value ! \n");
+                }
+                catch(HoursOutOfRange e)
+                {
+                        System.out.println(e.getMessage());
+                        this.Hour = 12;
+                }
+                catch(MinutesOutOfRange e)
+                {
+                        System.out.println(e.getMessage());
+                        this.Minute = 0;
+                }
+                catch(SecondsOutOfRange e)
+                {
+                        System.out.println(e.getMessage());
+                        this.Second = 0;
+                }
+                
+        }
+
+        public void ShowAlarm() 
+        {
+                System.out.println("\nAlarmClock{ Hour=" + Hour + ", Minute=" + Minute + ", Second=" + Second + "}");
+        }
+        
+        public void SetAlarm(int Hours, int Minutes, int seconds)
+        {
+                if(Hours <= 12 && Hours >= 0)
+                        this.Hour = Hours;
+                else
+                        this.Hour = 0;
+                
+                if(Minutes < 60 && Minutes >= 0)
+                        this.Minute = Minutes;
+                else
+                        this.Hour = 0;
+                
+                if(seconds < 60 && seconds >= 0 )
+                        this.Second = seconds;
+                else
+                        this.Second = 0;
+        }
+        
+              
+}
+  ...................................................................................................................................................................................
+  //Version G
+  
+  
+package com.mycompany.javaproject1;
+import  java.util.Scanner;
+
+public class JavaProject1
+{
+    public static void main(String args[]) 
+    {
+            Employee manager1 = new Manager("It Department",  4,  6,  2,  "emp-0089",  "Smith weson JR.",  "new candy road malabe");
+            manager1.read();
+        
+
+        
+    }
+
+}
+
+class Employee
+{
+    private String Empid, name, address;
+
+    public Employee(String Empid, String name, String address)
+    {
+        this.Empid = Empid;
+        this.name = name;
+        this.address = address;
+    }
+    
+    public void read()
+    {
+        Scanner reader = new Scanner(System.in);
+
+        System.out.print("\nEnter the employee ID : ");
+        this.Empid = (String)reader.nextLine();
+
+        System.out.print("\nEnter the employee name : ");
+        this.name= (String)reader.nextLine();
+
+        System.out.print("\nEnter the employee address :  ");
+        this.address = (String)reader.nextLine();
+       
+    }
+    
+    public void print()
+    {
+                System.out.println("\nEmployee{Empid=" + Empid + ", name=" + name + ", address=" + address + "}");
+    }
+}
+
+class Manager extends Employee
+{
+        private String department;
+        private int ProductNo1, ProductNo2, ProductNo3;
+
+        public Manager(String department, int ProductNo1, int ProductNo2, int ProductNo3, String Empid, String name, String address)
+        {
+                super(Empid, name, address);
+                this.department = department;
+                this.ProductNo1 = ProductNo1;
+                this.ProductNo2 = ProductNo2;
+                this.ProductNo3 = ProductNo3;
+        }
+        
+        @Override
+        public void read()
+        {
+                super.read();
+                
+                Scanner reader = new Scanner(System.in);
+
+                System.out.print("\nEnter the Department : ");
+                this.department = (String)reader.nextLine();
+
+                try
+                {
+                        System.out.print("\nEnter the ProductNo1 : ");
+                        this.ProductNo1= (int)reader.nextInt();
+
+                        System.out.print("\nEnter the ProductNo2 : ");
+                        this.ProductNo2= (int)reader.nextInt();
+
+                        System.out.print("\nEnter the ProductNo3 : ");
+                        this.ProductNo3= (int)reader.nextInt();
+                        
+                }
+                catch (Exception e) 
+                {
+                        System.out.println("\n\t * please enter integer values * ");
+                }
+        }
+        
+        @Override
+        public void print()
+        {
+                super.print();
+                System.out.println("Manager{" + "department=" + department + ", ProductNo1=" + ProductNo1 + ", ProductNo2=" + ProductNo2 + ", ProductNo3=" + ProductNo3 + "}");
+        }    
+}
+
+  ..........................................................................................
+  
   </pre>
 </body>
 </html>
